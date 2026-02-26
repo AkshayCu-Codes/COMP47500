@@ -12,7 +12,7 @@ public class Stack<T> {
 	}
 
 	public void push(T value) { // adding to the top of the stack
-		stack.add(value);
+		stack.add(value);	
 	}
 
 	public T pop() { // removing from the top of the stack
@@ -24,7 +24,7 @@ public class Stack<T> {
 
 	public T peek() { // returns the top element without removing it
 		if (isEmpty()) {
-			throw new EmptyStackException();
+			throw new EmptyStackException(); 
 		}
 		return stack.get(stack.size() - 1);
 	}

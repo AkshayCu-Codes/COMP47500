@@ -7,37 +7,42 @@ public class Stack<T> {
 
 	private ArrayList<T> stack;
 
+	// initialising an empty stack
 	public Stack() {
-		this.stack = new ArrayList<>(); // initialising an empty stack
+		this.stack = new ArrayList<>(); 
 	}
 
-	public void push(T value) { // adding to the top of the stack
+	// adding to the top of the stack
+	public void push(T value) { 
 		stack.add(value);	
 	}
 
-	public T pop() { // removing from the top of the stack
+	// removing from the top of the stack
+	public T pop() { 
 		if (isEmpty()) {
 			throw new EmptyStackException();
 		}
 		return stack.remove(stack.size() - 1);
 	}
 
-	public T peek() { // returns the top element without removing it
+	// returns top value without removing it
+	public T peek() { 
 		if (isEmpty()) {
 			throw new EmptyStackException(); 
 		}
 		return stack.get(stack.size() - 1);
 	}
 
-	public boolean isEmpty() { // checking if the stack is empty
+	public boolean isEmpty() { 
 		return stack.isEmpty();
 	}
 
-	public int size() { // returns the number of elements in the stack
+	public int size() { 
 		return stack.size();
 	}
 
-	public void display() { // printing the stack contents
+	// prints stack contents from bottom to top
+	public void display() { 
 		System.out.print("[");
 		for (int i = 0; i < stack.size(); i++) {
 			System.out.print(stack.get(i));

@@ -20,6 +20,7 @@ A simple virtual machine that mimics how the JVM uses a stack to evaluate mathem
 | `Stack.java` | Custom stack implementation using ArrayList |
 | `JVM.java` | Compiles and executes expressions using the stack |
 | `Main.java` | User interface - enter expressions and see results |
+| `Test.java` | Stress tests the JVM and Stack to check for time complexity | 
 
 ---
 
@@ -64,6 +65,7 @@ Output: 25
 1. Open Eclipse
 2. Import the project
 3. Run `Main.java` for the expression evaluator
+4. Run `Test.java` to stress test the JVM
 
 ---
 

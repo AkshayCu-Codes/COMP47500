@@ -19,7 +19,7 @@ public class Test {
             long startTime = System.nanoTime();
             
             for (int i = 0; i < totalRuns; i++) {
-                // Generate a random expression for every single run
+                // Generating a random expression for every single run
                 // Length varies between 3 and 15 tokens to simulate different complexities
                 String expression = generateRandomExpression(rand.nextInt(12) + 3);
                 

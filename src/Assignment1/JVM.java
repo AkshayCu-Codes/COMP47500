@@ -16,7 +16,8 @@ public class JVM {
 		ArrayList<String> instructions = new ArrayList<>();
 		Stack<String> ops = new Stack<>(); 
 		String prev = null;
-
+		
+		//parses the expression to get individual tokens 
 		for (String token : tokens) {
 			if (isNumber(token)) {
 				if (prev != null && isNumber(prev)) { 
@@ -57,7 +58,7 @@ public class JVM {
 		for (String instruction : instructions) {
 			String[] parts = instruction.trim().split("\\s+");
 			String op = parts[0].toUpperCase();
-
+			
 			switch (op) {
 				case "PUSH":
 					stack.push(Integer.parseInt(parts[1]));

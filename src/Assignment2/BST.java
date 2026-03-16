@@ -1,8 +1,10 @@
 package Assignment2;
+import java.util.List;
+import java.util.ArrayList;
 
 class BST<K extends Comparable<K>, V> {
 	 
-    //Node (internal)
+    //node definition
     private static class Node<K, V> {
         K key;
         V value;
@@ -17,7 +19,7 @@ class BST<K extends Comparable<K>, V> {
     private Node<K, V> root;
     private int size;
  
-    //Insert
+    //insert using recursion
     public void insert(K key, V value) {
         root = insertRec(root, key, value);
     }
@@ -38,7 +40,7 @@ class BST<K extends Comparable<K>, V> {
     }
 
     
-    //Search
+    //search using recursion
     public V search(K key) {
         Node<K, V> node = searchRec(root, key);
         return (node == null) ? null : node.value;
@@ -57,7 +59,7 @@ class BST<K extends Comparable<K>, V> {
     }
     
     
-    //Delete
+    //delete using recursion
     public void delete(K key) {
         root = deleteRec(root, key);
     }
@@ -91,9 +93,42 @@ class BST<K extends Comparable<K>, V> {
         return node;
     }
  
+    
+    // since the left node of a bst is always the min, we return that
     private Node<K, V> findMin(Node<K, V> node) {
         while (node.left != null) 
         	node = node.left;
         return node;
     }   
+    
+    // this is our main algorithm, we will be searching for items in a range using this
+    // this is one of the main advantages of a bst
+    public List<V> rangeSearch(K lo, K hi) {
+        List<V> results = new ArrayList<>();
+        rangeRec(root, lo, hi, results);
+        return results;
+    }
+
+    private void rangeRec(Node<K, V> node, K lo, K hi, List<V> results) {
+        if (node == null) return;
+
+        int cmpLo = lo.compareTo(node.key);
+        int cmpHi = hi.compareTo(node.key);
+
+        // look left
+        if (cmpLo < 0) 
+            rangeRec(node.left, lo, hi, results); 
+
+        // within our range
+        if (cmpLo <= 0 && cmpHi >= 0) 
+            results.add(node.value);               
+
+        // look right
+        if (cmpHi > 0) 
+            rangeRec(node.right, lo, hi, results);
+    } 
+    
+    public int size() { return size; }
+    
+    public boolean isEmpty() { return size == 0; }
 }

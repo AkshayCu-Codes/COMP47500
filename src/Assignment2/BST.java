@@ -131,4 +131,17 @@ class BST<K extends Comparable<K>, V> {
     public int size() { return size; }
     
     public boolean isEmpty() { return size == 0; }
+    
+    // printing the tree
+    public void printTree() {
+        printRec(root, "", true);
+    }
+
+    private void printRec(Node<K, V> node, String indent, boolean isRight) {
+        if (node == null) return;
+        printRec(node.right, indent + (isRight ? "        " : " |      "), true);
+        System.out.println(indent + (isRight ? " /" : " \\") + "----- [" + node.key + " | " + node.value + "]");
+        printRec(node.left,  indent + (isRight ? " |      " : "        "), false);
+    }
+
 }

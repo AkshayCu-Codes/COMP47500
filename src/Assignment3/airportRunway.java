@@ -1,5 +1,10 @@
 package Assignment3;
 
+//NOTE: getNextFlight() scans the entire array every time a flight is dispatched
+//This is O(n) - with 100s of flights this gets slow
+//Switching to MinHeap which gives O(log n) insert and dispatch
+//MinHeap always keeps lowest priority flight at top - no scanning needed
+
 public class airportRunway {
 
     static flight[] flights = new flight[10];

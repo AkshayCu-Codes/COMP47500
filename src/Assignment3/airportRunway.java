@@ -3,23 +3,26 @@ package Assignment3;
 public class airportRunway {
 
     static void printFlight(int slot, flight f) {
-        System.out.println("\nSlot " + slot + ": CLEARED TO LAND");
+        System.out.println("\nSlot " + slot + ":");
         System.out.println("  Flight   : " + f.flightCode);
         System.out.println("  Priority : " + f.priority);
         System.out.println("  Fuel     : " + f.fuelLevel + "% remaining");
+        System.out.println("  Queued   : " + f.queuedAt);
+        System.out.println("  Landed   : " + f.landedAt);
     }
 
     public static void main(String[] args) {
 
-    	minHeap runway = new minHeap(12);
+        minHeap runway = new minHeap(12);
 
-        runway.addFlight("RYR101 - Dublin to London",    45, false, false);
-        runway.addFlight("EI404  - Emergency Landing",    8, true,  false);
-        runway.addFlight("FR202  - Amsterdam to Dublin", 62, false, false);
-        runway.addFlight("AA789  - Critical Fuel",       15, false, false);
-        runway.addFlight("BA317  - New York to Dublin",  50, false, true);
-        runway.addFlight("LH324  - Emergency Low Fuel",  25, true,  false);
-        runway.addFlight("TK891  - Critical Fuel Only",   7, false, false);
+        // addFlight(flightCode, fuelLevel, emergency, longHaul, queuedAt, landedAt)
+        runway.addFlight("EI404  - New York to Dublin",      8, true,  true,  "14:05", "14:11");
+        runway.addFlight("LH324  - Frankfurt to Dublin",    25, true,  false, "14:12", "14:21");
+        runway.addFlight("TK891  - Istanbul to Dublin",      7, false, true,  "14:19", "14:26");
+        runway.addFlight("AA789  - Boston to Dublin",       15, false, true,  "14:27", "14:38");
+        runway.addFlight("BA317  - London to Dublin",       50, false, false, "14:35", "14:51");
+        runway.addFlight("FR202  - Amsterdam to Dublin",    62, false, false, "14:41", "15:02");
+        runway.addFlight("RYR101 - Madrid to Dublin",       45, false, false, "14:48", "15:10");
 
         System.out.println("========================================");
         System.out.println("  DUBLIN AIRPORT - LANDING QUEUE       ");

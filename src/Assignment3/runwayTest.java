@@ -32,14 +32,19 @@ public class runwayTest {
 
         minHeap heap = new minHeap(flightCount);
         count = 0;
+        int emergencyCount = 0; 
 
         // same seed ensures both heap and array get identical flights
         Random r = new Random(42);
         for (int i = 0; i < flightCount; i++) {
-            int fuelLevel     = r.nextInt(90) + 10;
+            int fuelLevel = r.nextInt(100);
             boolean emergency = fuelLevel < 10;
-            boolean longHaul  = fuelLevel > 50;
-            int priority      = flight.calculatePriority(emergency, fuelLevel, longHaul);
+            
+            if (emergency) 
+            	emergencyCount++;
+
+            boolean longHaul = fuelLevel > 50;
+            int priority = flight.calculatePriority(emergency, fuelLevel, longHaul);
             heap.addFlight("FL" + i, fuelLevel, emergency, longHaul, "", "");
             addFlightArray(priority, "FL" + i, fuelLevel);
         }
@@ -55,10 +60,11 @@ public class runwayTest {
         long endArray = System.nanoTime();
 
         if (print) {
-            System.out.printf("%-15s | %-20s | %-20s%n",
+            System.out.printf("%-15s | %-20s | %-20s | %-15s%n",
                 flightCount,
                 (endHeap  - startHeap),
-                (endArray - startArray)
+                (endArray - startArray),
+                emergencyCount
             );
         }
     }
@@ -70,15 +76,15 @@ public class runwayTest {
 
         // flights per hour at major airports
         int[] scales = {30, 90, 180, 200};
-
-        System.out.printf("%-15s | %-20s | %-20s%n",
-            "Airport Scale", "MinHeap Dispatch(ns)", "Array Dispatch(ns)");
-        System.out.println("-".repeat(60));
+        
+        System.out.printf("%-15s | %-20s | %-20s | %-15s%n",
+            "Airport Scale", "MinHeap Dispatch(ns)", "Array Dispatch(ns)", "Emergencies ");
+        System.out.println("-".repeat(75));
 
         for (int scale : scales) {
             runBenchmark(scale, true);
         }
 
-        System.out.println("-".repeat(60));
+        System.out.println("-".repeat(75));
     }
 }

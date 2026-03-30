@@ -63,7 +63,7 @@ public class minHeap {
     // adds a new flight and restores heap order
     public void addFlight(String flightCode, int fuelLevel, boolean emergency, boolean longHaul, String queuedAt, String landedAt) {
         int priority = flight.calculatePriority(emergency, fuelLevel, longHaul);
-        heap[size] = new flight(priority, flightCode, fuelLevel, queuedAt, landedAt);
+        heap[size] = new flight(priority, flightCode, fuelLevel, emergency, queuedAt, landedAt);
         siftUp(size);
         size++;
     }

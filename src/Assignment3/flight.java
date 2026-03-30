@@ -7,13 +7,15 @@ public class flight implements Comparable<flight> {
     int fuelLevel;
     String queuedAt;
     String landedAt;
+    boolean emergency;
 
-    public flight(int priority, String flightCode, int fuelLevel, String queuedAt, String landedAt) {
+    public flight(int priority, String flightCode, int fuelLevel, boolean emergency,String queuedAt, String landedAt) {
         this.priority   = priority;
         this.flightCode = flightCode;
         this.fuelLevel  = fuelLevel;
         this.queuedAt   = queuedAt;
         this.landedAt   = landedAt;
+        this.emergency = emergency;
     }
 
     static int calculatePriority(boolean emergency, int fuelLevel, boolean longHaul) {

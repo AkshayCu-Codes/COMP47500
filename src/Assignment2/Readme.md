@@ -1,101 +1,175 @@
-# Assignment 2 - Binary Search Tree 
+# Assignment 2 – BST-Based Store Inventory System
 
-A simple Binary Search Tree (BST) implementation in Java that stores key-value pairs and supports efficient insertion, search, deletion, and range search operations.
+## Overview
 
-## How it works
+This project implements a **store inventory system using a Binary Search Tree (BST)** in Java. The system stores items using **price as the key**, which allows efficient ordered operations such as exact search, sorted listing, minimum/maximum lookup, and **range-based retrieval**.
 
-* Keys and values are inserted into the BST
-* The BST organizes nodes based on key order
-* Smaller keys go to the left, and larger keys go to the right
-* Duplicate keys update the existing value instead of creating a new node
-* Range search returns all values whose keys lie within a given range
-* `Test.java` benchmarks insertion and range search performance for different input sizes
+In addition to the core implementation, the project includes a **benchmark test file** that compares the BST approach with an `ArrayList` for insertion and range search performance across different dataset sizes.
 
-## Classes
+---
 
-| Class       | Description                                                                                                     |
-| ----------- | --------------------------------------------------------------------------------------------------------------- |
-| `BST.java`  | Generic Binary Search Tree implementation with insert, search, delete, range search, size, and print operations |
-| `Main.java` | Demonstrates BST insertion and prints the tree structure                                                        |
-| `Test.java` | Benchmarks BST insertion and range search to study performance and time complexity                              |
+## Project Structure
 
-## Supported Operations
+### `BST.java`
 
-| Operation             | Description                                             |
-| --------------------- | ------------------------------------------------------- |
-| `insert(key, value)`  | Inserts a key-value pair into the BST                   |
-| `search(key)`         | Searches for a key and returns its value                |
-| `delete(key)`         | Removes a node with the given key                       |
-| `rangeSearch(lo, hi)` | Returns all values whose keys are between `lo` and `hi` |
-| `size()`              | Returns the number of nodes in the BST                  |
-| `printTree()`         | Prints the BST structure sideways                       |
+A generic Binary Search Tree implementation using:
 
-## Example
+* `K` as the key type
+* `V` as the value type
 
-```text
-Insert:
-85 -> Alice
-72 -> Bob
-91 -> Charlie
-60 -> Diana
-78 -> Eve
-95 -> Frank
-55 -> Grace
-88 -> Hank
-72 -> Ivan
-100 -> Jane
+#### Supported operations
 
-Range Search:
-70 to 90
+* `insert(key, value)` – inserts a node into the BST
+* `search(key)` – searches for a value by exact key
+* `delete(key)` – removes a node by key
+* `rangeSearch(lo, hi)` – returns all values whose keys fall within a range
+* `inOrder()` – returns all values in ascending key order
+* `min()` – returns the value with the smallest key
+* `max()` – returns the value with the largest key
+* `printTree()` – prints the BST structure visually
+* `size()` and `isEmpty()` – basic utility methods
 
-Output:
-[Ivan, Eve, Alice, Hank]
-```
+---
 
-## Tree Structure
+### `Item.java`
 
-```text
-                         /----- [100 | Jane]
-                 /----- [95 | Frank]
-         /----- [91 | Charlie]
-         |       \----- [88 | Hank]
- /----- [85 | Alice]
- |       |       /----- [78 | Eve]
- |       \----- [72 | Ivan]
- |               \----- [60 | Diana]
- |                       \----- [55 | Grace]
-```
+Represents a product in the store.
 
-## Benchmark Output
+#### Attributes
 
-`Test.java` runs the BST with increasing input sizes and reports:
+* `name` – item name
+* `price` – item price
+* `category` – item category
 
-* Node count
-* Actual BST size
-* Insertion time
-* Average range search time
-* Average hits returned
+The `toString()` method is overridden so that items print in a clean formatted style.
 
-This helps verify that:
+---
 
-* Insertion time increases as the tree size grows
-* Range search remains efficient by visiting only relevant nodes
-* Duplicate keys reduce the final BST size because values are updated instead of adding new nodes
+### `StoreInventory.java`
 
-## How to run
+This class acts as a wrapper around the BST and provides inventory-specific methods.
 
-1. Open Eclipse
-2. Import the project
-3. Run `Main.java` to see BST insertion and tree structure
-4. Run `Test.java` to benchmark insertion and range search performance
+#### Supported operations
 
-## Cost Analysis
+* `addItem(name, price, category)`
+* `removeItem(price)`
+* `findItem(price)`
+* `findInRange(lo, hi)`
+* `listAll()`
+* `cheapest()`
+* `mostExpensive()`
+* `size()`
+* `isEmpty()`
+* `printTree()`
 
-* Insert: `O(log n)` average per operation
-* Search: `O(log n)` average
-* Delete: `O(log n)` average
-* Range Search: `O(log n + k)` average, where `k` is the number of matching results
-* Worst case: if the BST becomes unbalanced, operations can degrade to `O(n)`
+This keeps the project modular by separating store logic from tree implementation.
+
+---
+
+### `StoreRunner.java`
+
+A simple runner class used to test the store inventory system.
+
+#### Demonstrates
+
+* inserting sample items
+* printing all items sorted by price
+* searching for an exact item by price
+* performing range searches
+* printing the internal BST structure
+
+---
+
+### `StoreTester.java`
+
+The benchmark file for performance comparison between:
+
+* **BST-based inventory**
+* **ArrayList-based storage**
+
+#### What it does
+
+For each dataset size, the test file:
+
+1. Generates random items with **unique prices**
+2. Measures **insertion time** for both BST and `ArrayList`
+3. Measures **range search time** for both structures using the interval **€250–€750**
+4. Prints the results in a formatted table
+
+Unique prices are necessary because the BST uses **price as the key**, and duplicate keys would overwrite existing values.
+
+---
+
+## Key Features
+
+* Generic BST implementation
+* Store inventory built on top of BST
+* Exact search by price
+* Efficient range search using BST traversal
+* Sorted output using in-order traversal
+* Cheapest and most expensive item lookup
+* Tree visualisation
+* Practical benchmarking against `ArrayList`
+
+---
+
+## Time Complexity
+
+### BST Operations
+
+* Insert: **O(log n)** average, **O(n)** worst case
+* Search: **O(log n)** average, **O(n)** worst case
+* Delete: **O(log n)** average, **O(n)** worst case
+* Range Search: **O(log n + k)** average, where `k` is the number of results
+* In-order Traversal: **O(n)**
+* Min / Max: **O(log n)** average, **O(n)** worst case
+
+### ArrayList Operations in Benchmark
+
+* Insert (append): **O(1)** amortized per item
+* Range Search: **O(n)** because every item must be checked
+
+---
+
+## Benchmark Interpretation
+
+The benchmark results show a clear trade-off between the two data structures:
+
+* **ArrayList is faster for insertion** because items are simply appended.
+* **BST takes longer for insertion** because it must place each item in the correct ordered position.
+* For **range search**, the BST performs better at many small and medium dataset sizes because it can skip branches that are outside the target interval.
+* At very large sizes, the advantage of BST may reduce if the search range is broad, since many nodes still need to be visited.
+
+### Theoretical vs Practical View
+
+Theoretically, a BST is more efficient for ordered range queries than a linear scan. However, in practice, performance also depends on factors such as:
+
+* dataset size
+* tree shape
+* search interval width
+* memory access patterns
+* implementation overhead
+
+---
+
+## Example Output
+
+The benchmark compares:
+
+* **BST Insert vs ArrayList Insert**
+* **BST Range vs ArrayList Range**
+
+This helps show where a BST is beneficial and where a simple list may still perform better.
+
+---
+
+## How to Run
+
+1. Compile all Java files in the `Assignment2` package.
+2. Run `StoreRunner` to test functionality.
+3. Run `StoreTester` to execute the benchmark.
+
+---
 
 ## Contributors
 
@@ -103,3 +177,9 @@ This helps verify that:
 | ---------------------------- | ---------- |
 | Akshay Channapla Udaya Kumar | 25211966   |
 | Sharan Srinivasan Sathyan    | 25201187   |
+
+---
+
+## Conclusion
+
+This project demonstrates how a Binary Search Tree can be applied to a real-world inventory scenario where items are naturally ordered by price. It also shows that data structure choice depends on the operation being prioritised: `ArrayList` is better for simple bulk insertion, while BST is more suitable for ordered queries and selective range searches.

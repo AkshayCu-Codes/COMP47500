@@ -1,17 +1,17 @@
 package Assignment4;
 
-import java.util.BitSet;
+
 
 public class BloomFilter {
 	
-	private final BitSet bitArray;
+	private final HashTable bitArray;
 	private final int size;		   // number of bits, m
 	private final int numHashes;   // number of hash functions, k
 	
 	public BloomFilter(int size, int numHashes){
 		this.size = size;
 		this.numHashes = numHashes;
-		this.bitArray = new BitSet(size);
+		this.bitArray = new HashTable(size);
 	}
 	
 	// hash functions

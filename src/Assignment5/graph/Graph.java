@@ -14,6 +14,10 @@ public class Graph {
     }
 
     public void addEdge(Node from, Node to, int weight, boolean bidirectional) {
+        if (!adjList.containsKey(from) || !adjList.containsKey(to)) {
+            throw new IllegalArgumentException("Both nodes must exist in graph");
+        }
+
         adjList.get(from).add(new Edge(to, weight));
 
         if (bidirectional) {

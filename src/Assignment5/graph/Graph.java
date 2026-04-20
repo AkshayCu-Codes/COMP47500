@@ -13,8 +13,12 @@ public class Graph {
         adjList.putIfAbsent(node, new ArrayList<>());
     }
 
-    public void addEdge(Node from, Node to, int weight) {
+    public void addEdge(Node from, Node to, int weight, boolean bidirectional) {
         adjList.get(from).add(new Edge(to, weight));
+
+        if (bidirectional) {
+            adjList.get(to).add(new Edge(from, weight));
+        }
     }
 
     public Map<Node, List<Edge>> getAdjList() {

@@ -12,8 +12,8 @@ public class GraphTest {
         graph.addNode(n2);
         graph.addNode(n3);
 
-        graph.addEdge(n1, n2, 5);
-        graph.addEdge(n2, n3, 3);
+        graph.addEdge(n1, n2, 5, true);
+        graph.addEdge(n2, n3, 3, true);
 
         graph.printGraph();
     }

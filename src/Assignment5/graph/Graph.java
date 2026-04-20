@@ -20,4 +20,13 @@ public class Graph {
     public Map<Node, List<Edge>> getAdjList() {
         return adjList;
     }
+    public void printGraph() {
+        for (Node node : adjList.keySet()) {
+            System.out.print(node + " -> ");
+            for (Edge edge : adjList.get(node)) {
+                System.out.print(edge.getTarget() + "(" + edge.getWeight() + ") ");
+            }
+            System.out.println();
+        }
+    }
 }

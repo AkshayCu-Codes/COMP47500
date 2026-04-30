@@ -1,6 +1,7 @@
 package Assignment5.graph;
 
 import Assignment5.algorithms.BFS;
+import Assignment5.algorithms.Dijkstra;
 import Assignment5.visual.GraphVisualizer;
 import java.util.List;
 
@@ -30,9 +31,15 @@ public class GraphTest {
         graph.printGraph();
 
         List<Node> bfsPath = BFS.findPath(graph, n1, n5);// find path from n1 to n5 using BFS
+        List<Node> dijkstraPath = Dijkstra.findShortestPath(graph, n1, n5);
 
+       
         System.out.println("\nBFS Path: " + bfsPath);
+        
+        System.out.println("Dijkstra Path: " + dijkstraPath);
+        System.out.println("Dijkstra Cost: " + Dijkstra.getPathCost(graph, dijkstraPath));
 
-        GraphVisualizer.showGraph(graph, bfsPath);
+        GraphVisualizer.showGraph(graph, bfsPath, "BFS Path");
+        GraphVisualizer.showGraph(graph, dijkstraPath, "Dijkstra Path");
     }
 }

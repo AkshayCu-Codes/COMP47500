@@ -123,8 +123,8 @@ public class GraphVisualizer extends JPanel {
         }
     }
 
-    public static void showGraph(Graph graph, List<Node> path) {
-        JFrame frame = new JFrame("BFS Emergency Route Visualization");
+    public static void showGraph(Graph graph, List<Node> path, String title) {
+        JFrame frame = new JFrame(title);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(new GraphVisualizer(graph, path));
         frame.pack();

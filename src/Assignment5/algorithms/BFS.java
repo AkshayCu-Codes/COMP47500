@@ -5,30 +5,50 @@ import java.util.*;
 
 public class BFS {
 
-    // BFS
-    public void traverse(Graph graph, Node start) {
+    // finds path from start to goal
+    public static List<Node> findPath(Graph graph, Node start, Node goal) {
 
-        Set<Node> visited = new HashSet<>();
         Queue<Node> queue = new LinkedList<>();
+        Set<Node> visited = new HashSet<>();
+        Map<Node, Node> previous = new HashMap<>();
 
-        // start
         queue.add(start);
         visited.add(start);
 
         while (!queue.isEmpty()) {
 
-            // take the next node to process
             Node current = queue.poll();
-            System.out.print(current + " ");
-            // explore all connected neighbours
-            for (Edge edge : graph.getAdjList().get(current)) {
+
+            if (current.equals(goal)) {
+                return buildPath(previous, start, goal);
+            }
+
+            for (Edge edge : graph.getNeighbors(current)) {
                 Node neighbor = edge.getTarget();
-                // only visit unvisited nodes
+
                 if (!visited.contains(neighbor)) {
                     visited.add(neighbor);
+                    previous.put(neighbor, current);
                     queue.add(neighbor);
                 }
             }
         }
+
+        return new ArrayList<>(); // no path
+    }
+
+    // build path from goal → start
+    private static List<Node> buildPath(Map<Node, Node> previous, Node start, Node goal) {
+        List<Node> path = new ArrayList<>();
+        Node current = goal;
+
+        while (current != null) {
+            path.add(current);
+            if (current.equals(start)) break;
+            current = previous.get(current);
+        }
+
+        Collections.reverse(path);
+        return path;
     }
 }

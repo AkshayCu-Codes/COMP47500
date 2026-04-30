@@ -28,6 +28,9 @@ public class Graph {
     public Map<Node, List<Edge>> getAdjList() {
         return adjList;
     }
+    public List<Edge> getNeighbors(Node node) {
+        return adjList.getOrDefault(node, new ArrayList<>());
+    }
     public void printGraph() {
         for (Node node : adjList.keySet()) {
             System.out.print(node + " -> ");

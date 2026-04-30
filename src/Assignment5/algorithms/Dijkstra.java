@@ -5,12 +5,20 @@ import java.util.*;
 
 public class Dijkstra {
 
+    private static int visitedNodes = 0;
+
+    public static int getVisitedNodes() {
+        return visitedNodes;
+    }
+
     public static List<Node> findShortestPath(Graph graph, Node start, Node goal) {
+
+        visitedNodes = 0;
 
         Map<Node, Integer> distances = new HashMap<>();
         Map<Node, Node> previous = new HashMap<>();
 
-        // pick node with smallest distance
+        // select node with minimum distance
         PriorityQueue<Node> queue = new PriorityQueue<>(
                 Comparator.comparingInt(distances::get)
         );
@@ -25,8 +33,8 @@ public class Dijkstra {
         while (!queue.isEmpty()) {
 
             Node current = queue.poll();
+            visitedNodes++;
 
-            // stop when goal is reached
             if (current.equals(goal)) {
                 return buildPath(previous, start, goal);
             }
@@ -36,7 +44,7 @@ public class Dijkstra {
 
                 int newDistance = distances.get(current) + edge.getWeight();
 
-                // update only if shorter path found
+                // relax edge if shorter path found
                 if (newDistance < distances.get(neighbor)) {
                     distances.put(neighbor, newDistance);
                     previous.put(neighbor, current);
@@ -74,9 +82,7 @@ public class Dijkstra {
 
         while (current != null) {
             path.add(current);
-
             if (current.equals(start)) break;
-
             current = previous.get(current);
         }
 

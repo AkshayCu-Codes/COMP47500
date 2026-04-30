@@ -5,12 +5,21 @@ import java.util.*;
 
 public class AStar {
 
+    private static int visitedNodes = 0;
+
+    public static int getVisitedNodes() {
+        return visitedNodes;
+    }
+
     public static List<Node> findPath(Graph graph, Node start, Node goal) {
+
+        visitedNodes = 0;
 
         Map<Node, Integer> gScore = new HashMap<>();
         Map<Node, Integer> fScore = new HashMap<>();
         Map<Node, Node> previous = new HashMap<>();
 
+        // select node with lowest f = g + h
         PriorityQueue<Node> openSet = new PriorityQueue<>(
                 Comparator.comparingInt(fScore::get)
         );
@@ -27,6 +36,7 @@ public class AStar {
         while (!openSet.isEmpty()) {
 
             Node current = openSet.poll();
+            visitedNodes++;
 
             if (current.equals(goal)) {
                 return buildPath(previous, start, goal);
@@ -34,9 +44,10 @@ public class AStar {
 
             for (Edge edge : graph.getNeighbors(current)) {
                 Node neighbor = edge.getTarget();
+
                 int newScore = gScore.get(current) + edge.getWeight();
 
-                // update only if better route found
+                // update if better path found
                 if (newScore < gScore.get(neighbor)) {
                     previous.put(neighbor, current);
                     gScore.put(neighbor, newScore);
@@ -62,9 +73,7 @@ public class AStar {
 
         while (current != null) {
             path.add(current);
-
             if (current.equals(start)) break;
-
             current = previous.get(current);
         }
 

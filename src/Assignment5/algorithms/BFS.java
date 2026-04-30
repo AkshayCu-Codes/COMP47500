@@ -5,8 +5,15 @@ import java.util.*;
 
 public class BFS {
 
-    // finds path from start to goal
+    private static int visitedNodes = 0;
+
+    public static int getVisitedNodes() {
+        return visitedNodes;
+    }
+
     public static List<Node> findPath(Graph graph, Node start, Node goal) {
+
+        visitedNodes = 0;
 
         Queue<Node> queue = new LinkedList<>();
         Set<Node> visited = new HashSet<>();
@@ -18,6 +25,7 @@ public class BFS {
         while (!queue.isEmpty()) {
 
             Node current = queue.poll();
+            visitedNodes++;
 
             if (current.equals(goal)) {
                 return buildPath(previous, start, goal);
@@ -34,10 +42,10 @@ public class BFS {
             }
         }
 
-        return new ArrayList<>(); // no path
+        return new ArrayList<>();
     }
 
-    // build path from goal → start
+    // rebuild path from goal → start
     private static List<Node> buildPath(Map<Node, Node> previous, Node start, Node goal) {
         List<Node> path = new ArrayList<>();
         Node current = goal;

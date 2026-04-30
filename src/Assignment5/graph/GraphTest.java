@@ -4,6 +4,7 @@ import Assignment5.algorithms.BFS;
 import Assignment5.algorithms.Dijkstra;
 import Assignment5.algorithms.AStar;
 import Assignment5.visual.GraphVisualizer;
+
 import java.util.List;
 
 public class GraphTest {
@@ -11,11 +12,11 @@ public class GraphTest {
 
         Graph graph = new Graph();
 
-        Node n1 = new Node(1); 
+        Node n1 = new Node(1);
         Node n2 = new Node(2);
         Node n3 = new Node(3);
         Node n4 = new Node(4);
-        Node n5 = new Node(5); 
+        Node n5 = new Node(5);
 
         graph.addNode(n1);
         graph.addNode(n2);
@@ -31,21 +32,30 @@ public class GraphTest {
 
         graph.printGraph();
 
-        List<Node> bfsPath = BFS.findPath(graph, n1, n5);// find path from n1 to n5 using BFS
-        List<Node> dijkstraPath = Dijkstra.findShortestPath(graph, n1, n5);
-        List<Node> aStarPath = AStar.findPath(graph, n1, n5);
+        // run algorithms
+        List<Node> bfsPath = BFS.findPath(graph, n1, n5);
+        List<Node> dijPath = Dijkstra.findShortestPath(graph, n1, n5);
+        List<Node> astarPath = AStar.findPath(graph, n1, n5);
 
-       
-        System.out.println("\nBFS Path: " + bfsPath);
-        
-        System.out.println("Dijkstra Path: " + dijkstraPath);
-        System.out.println("Dijkstra Cost: " + Dijkstra.getPathCost(graph, dijkstraPath));
-        
-        System.out.println("A* Path: " + aStarPath);
-        System.out.println("A* Cost: " + Dijkstra.getPathCost(graph, aStarPath));
+        // print results
+        System.out.println("\n--- BFS ---");
+        System.out.println("Path: " + bfsPath);
+        System.out.println("Cost: " + Dijkstra.getPathCost(graph, bfsPath));
+        System.out.println("Visited Nodes: " + BFS.getVisitedNodes());
 
+        System.out.println("\n--- Dijkstra ---");
+        System.out.println("Path: " + dijPath);
+        System.out.println("Cost: " + Dijkstra.getPathCost(graph, dijPath));
+        System.out.println("Visited Nodes: " + Dijkstra.getVisitedNodes());
+
+        System.out.println("\n--- A* ---");
+        System.out.println("Path: " + astarPath);
+        System.out.println("Cost: " + Dijkstra.getPathCost(graph, astarPath));
+        System.out.println("Visited Nodes: " + AStar.getVisitedNodes());
+
+        // visualize
         GraphVisualizer.showGraph(graph, bfsPath, "BFS Path");
-        GraphVisualizer.showGraph(graph, dijkstraPath, "Dijkstra Path");
-        GraphVisualizer.showGraph(graph, aStarPath, "A* Path");
+        GraphVisualizer.showGraph(graph, dijPath, "Dijkstra Path");
+        GraphVisualizer.showGraph(graph, astarPath, "A* Path");
     }
 }

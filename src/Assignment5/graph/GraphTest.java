@@ -12,11 +12,11 @@ public class GraphTest {
 
         Graph graph = new Graph();
 
-        Node n1 = new Node(1);
-        Node n2 = new Node(2);
-        Node n3 = new Node(3);
-        Node n4 = new Node(4);
-        Node n5 = new Node(5);
+        Node n1 = new Node(1, 0, 0);
+        Node n2 = new Node(2, 2, 2);
+        Node n3 = new Node(3, 2, -2);
+        Node n4 = new Node(4, 4, -2);
+        Node n5 = new Node(5, 6, 0);
 
         graph.addNode(n1);
         graph.addNode(n2);

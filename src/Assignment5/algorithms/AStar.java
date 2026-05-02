@@ -62,9 +62,12 @@ public class AStar {
         return new ArrayList<>();
     }
 
-    // simple heuristic 
+    // estimate distance to goal using coordinates
     private static int heuristic(Node current, Node goal) {
-        return Math.abs(current.getId() - goal.getId());
+        int dx = current.getX() - goal.getX();
+        int dy = current.getY() - goal.getY();
+
+        return (int) Math.sqrt(dx * dx + dy * dy);
     }
 
     private static List<Node> buildPath(Map<Node, Node> previous, Node start, Node goal) {

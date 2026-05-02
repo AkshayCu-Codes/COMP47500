@@ -24,6 +24,14 @@ public class Graph {
             adjList.get(to).add(new Edge(from, weight));
         }
     }
+    public Node getNodeById(int id) {
+        for (Node node : adjList.keySet()) {
+            if (node.getId() == id) {
+                return node;
+            }
+        }
+        return null;
+    }
 
     public Map<Node, List<Edge>> getAdjList() {
         return adjList;
